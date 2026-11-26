@@ -62,7 +62,7 @@ export const AiRooflineWidget: React.FC<Props> = ({
   const h100RidgeY = mapY(h100Spec.peakComputeTflops);
   const h100StartY = mapY(h100Spec.hbmBandwidthTBps * 1);
 
-  const embedSnippet = `<iframe src="https://widgets.firstprinciplestech.example/?widget=roofline&embed=1" width="100%" height="780" style="border:1px solid #D8D3C8;" loading="lazy" title="AI Accelerator Roofline & LLM KV-Cache Visualizer"></iframe>`;
+  const embedSnippet = `<iframe src="${window.location.origin}${window.location.pathname}?widget=roofline&embed=1" width="100%" height="780" style="border:1px solid #D8D3C8;" loading="lazy" title="AI Accelerator Roofline & LLM KV-Cache Visualizer"></iframe>`;
 
   const copyEmbed = async (): Promise<void> => {
     if (!isPro && onOpenMembership) {

@@ -65,7 +65,7 @@ export const QuantumOverheadWidget: React.FC<Props> = ({
 
   const targetY = mapY(Math.pow(10, targetExp));
 
-  const embedSnippet = `<iframe src="https://widgets.firstprinciplestech.example/?widget=quantum&embed=1" width="100%" height="740" style="border:1px solid #D8D3C8;" loading="lazy" title="Quantum Surface-Code & T-Factory Resource Estimator"></iframe>`;
+  const embedSnippet = `<iframe src="${window.location.origin}${window.location.pathname}?widget=quantum&embed=1" width="100%" height="740" style="border:1px solid #D8D3C8;" loading="lazy" title="Quantum Surface-Code & T-Factory Resource Estimator"></iframe>`;
 
   const copyEmbed = async (): Promise<void> => {
     if (!isPro && onOpenMembership) {
