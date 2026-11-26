@@ -1,0 +1,40 @@
+name: Daily FirstPrinciples arXiv & USPTO Radar
+
+on:
+  schedule:
+    # Aligned with arXiv's daily 24-hour announcement cycle
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  ingest-and-draft:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prototypes/p3-firstprinciples-tech/pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pipeline dependencies
+        run: pip install -e ".[dev]"
+      - name: Run unit tests (mocked HTTP 429/503 + draft lock)
+        run: pytest -v
+      - name: Run compliant ingestion & generate Ghost draft
+        env:
+          RADAR_CONTACT_EMAIL: ${{ secrets.RADAR_CONTACT_EMAIL }}
+          USPTO_ODP_API_KEY: ${{ secrets.USPTO_ODP_API_KEY }}
+          GHOST_API_URL: ${{ secrets.GHOST_API_URL }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+        run: |
+          if [ -n "$GHOST_ADMIN_API_KEY" ]; then
+            python -m radar.cli --push-ghost
+          else
+            python -m radar.cli
+          fi
+      - name: Upload markdown draft artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-radar-draft
+          path: prototypes/p3-firstprinciples-tech/pipeline/latest_digest_draft.md

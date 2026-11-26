@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --broadsheet-bg: #F7F5EF;
+  --sheet-card: #FFFFFF;
+  --ink-obsidian: #111315;
+  --ink-secondary: #4B5563;
+  --rule-line: #D8D3C8;
+  --blueprint-cobalt: #1D4ED8;
+  --oscilloscope-copper: #B45309;
+}
+
+body {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--broadsheet-bg);
+  color: var(--ink-obsidian);
+}
+
+.font-editorial {
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+}
+
+.font-mono-lab {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

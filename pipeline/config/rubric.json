@@ -1,0 +1,19 @@
+{
+  "version": "2026.1",
+  "arxiv_categories": ["quant-ph", "cond-mat.mes-hall", "cond-mat.supr-con", "cs.AR", "physics.app-ph"],
+  "uspto_cpc_classes": ["H01L", "G06N10/00", "H10N60/00"],
+  "target_assignees": ["NVIDIA", "Taiwan Semiconductor", "IBM", "Google", "Quantinuum", "SK hynix", "Microsoft"],
+  "signal_rules": [
+    { "id": "gate_fidelity", "pattern": "(?:99\\.\\d{1,3}%|two-qubit\\s+gate\\s+fidelity|10\\^-\\d)", "weight": 22, "label": "Quantitative Gate Fidelity / Error Rate" },
+    { "id": "coherence_time", "pattern": "(?:T_?1|T_?2|coherence\\s+time|microsecond|millisecond)", "weight": 15, "label": "T1/T2 Coherence Measurement" },
+    { "id": "topological_transport", "pattern": "(?:Majorana|Andreev|quantized\\s+conductance|skyrmion|magnon|spintronic|DMI|topological\\s+gap)", "weight": 18, "label": "Condensed-Matter / Topological Hardware Signal" },
+    { "id": "process_node", "pattern": "(?:\\b[1-7]nm\\b|A16|A14|GAA|CFET|backside\\s+power|High-NA\\s+EUV)", "weight": 20, "label": "Leading-Edge Process Node / Lithography" },
+    { "id": "hbm_bandwidth", "pattern": "(?:HBM3E|HBM4|TB/s|GB/s|CoWoS|wafer-scale|interposer)", "weight": 20, "label": "Memory Bandwidth & Advanced Packaging" },
+    { "id": "thermal_tdp", "pattern": "(?:\\b\\d{2,4}\\s?W\\b|TDP|liquid\\s+cooling|FLOP/W|TOPS/W)", "weight": 15, "label": "Thermal / Power Efficiency Metric" },
+    { "id": "qec_threshold", "pattern": "(?:surface\\s+code|LDPC|logical\\s+qubit|below\\s+threshold|magic\\s+state)", "weight": 22, "label": "Fault-Tolerant QEC Breakthrough" }
+  ],
+  "hype_penalty_rules": [
+    { "id": "unverified_supremacy", "pattern": "(?:exponential\\s+speedup\\s+for\\s+all|solves\\s+climate\\s+change|unlimited\\s+compute)", "weight": -18, "label": "Unsubstantiated Broad Hype Claim" },
+    { "id": "missing_baseline", "pattern": "(?:paradigm\\s+shift|revolutionary\\s+breakthrough)(?!.*(?:benchmark|baseline|error\\s+bar))", "weight": -10, "label": "Marketing Framing Without Baseline" }
+  ]
+}
