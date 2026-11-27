@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Cpu, Atom, Crown, Radio } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Cpu, Atom, KeyRound, Moon, Radio, Sun } from 'lucide-react';
 import { QuantumOverheadWidget } from './components/QuantumOverheadWidget';
 import { AiRooflineWidget } from './components/AiRooflineWidget';
 import { MembershipModal } from './components/MembershipModal';
@@ -75,6 +75,23 @@ export const App: React.FC = () => {
   const [isLocalHost] = useState<boolean>(() => detectLocalHost());
   const [license, setLicense] = useState<FpLicenseState>(() => loadInitialFpLicense(detectLocalHost()));
   const [memberOpen, setMemberOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    try {
+      return window.localStorage.getItem('fpth_theme_v1') === 'dark';
+    } catch (err) {
+      console.warn('Theme read fallback:', err);
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+    try {
+      window.localStorage.setItem('fpth_theme_v1', darkMode ? 'dark' : 'light');
+    } catch (err) {
+      console.warn('Theme save fallback:', err);
+    }
+  }, [darkMode]);
 
   const handleActivate = (next: FpLicenseState): void => {
     setLicense(next);
@@ -171,15 +188,24 @@ export const App: React.FC = () => {
               className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono-lab border cursor-pointer font-semibold ${
                 license.isPro
                   ? 'border-[#059669] bg-[#ECFDF5] text-[#065F46]'
-                  : 'border-[#B45309] bg-[#B45309] text-white hover:bg-[#92400E]'
+                  : 'border-[#111315] bg-[#F7F5EF] text-[#111315] hover:border-[#B45309]'
               }`}
             >
-              <Crown className="w-3.5 h-3.5" />
+              <KeyRound className="w-3.5 h-3.5" />
               {license.isPro
                 ? license.mode === 'local_full'
-                  ? 'LOCAL FULL (PRO)'
-                  : 'PRO MEMBER'
-                : 'Pro US$12/mo'}
+                  ? 'EDITION: PRO (LOCAL)'
+                  : 'EDITION: PRO'
+                : 'Edition & License'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setDarkMode((d) => !d)}
+              aria-label={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-mono-lab border border-[#D8D3C8] bg-[#F7F5EF] text-[#111315] cursor-pointer"
+            >
+              {darkMode ? <Sun className="w-3.5 h-3.5 text-[#FBBF24]" /> : <Moon className="w-3.5 h-3.5" />}
+              <span>{darkMode ? 'Light' : 'Dark'}</span>
             </button>
           </nav>
         </div>
