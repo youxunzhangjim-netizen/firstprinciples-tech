@@ -38,13 +38,13 @@ html[data-theme="dark"] select {
 }
 
 body {
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'IBM Plex Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--broadsheet-bg);
   color: var(--ink-obsidian);
 }
 
 .font-editorial {
-  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-family: 'Newsreader', 'Noto Sans TC', Georgia, 'Times New Roman', serif;
 }
 
 .font-mono-lab {

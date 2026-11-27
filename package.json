@@ -1,0 +1,10 @@
+{
+  "name": "firstprinciples-tech-monorepo",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix widgets run dev",
+    "typecheck": "npm --prefix widgets run typecheck",
+    "test": "npm --prefix widgets run test",
+    "build": "npm --prefix widgets ci && npm --prefix widgets run build"
+  }
+}

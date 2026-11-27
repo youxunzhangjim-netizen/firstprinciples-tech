@@ -1,0 +1,9 @@
+{
+  "$schema": "widgets/node_modules/wrangler/config-schema.json",
+  "name": "firstprinciples-tech",
+  "compatibility_date": "2026-01-01",
+  "assets": {
+    "directory": "./widgets/dist",
+    "not_found_handling": "single-page-application"
+  }
+}
